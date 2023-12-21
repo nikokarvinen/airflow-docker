@@ -22,8 +22,8 @@ This project is an Airflow-based data processing pipeline designed to automate t
 
 1. **Clone the Repository:**
 ```bash
-git clone [Your Repository URL]
-cd [Your Repository Name]
+git clone [https://github.com/nikokarvinen/airflow-docker.git]
+cd [airflow-docker]
 ```
 
 2. **Set Up Docker Compose:**
