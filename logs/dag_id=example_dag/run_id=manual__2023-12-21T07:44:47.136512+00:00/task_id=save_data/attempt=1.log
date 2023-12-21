@@ -1,0 +1,22 @@
+[2023-12-21T07:44:51.738+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: example_dag.save_data manual__2023-12-21T07:44:47.136512+00:00 [queued]>
+[2023-12-21T07:44:51.743+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: example_dag.save_data manual__2023-12-21T07:44:47.136512+00:00 [queued]>
+[2023-12-21T07:44:51.743+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2023-12-21T07:44:51.750+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): save_data> on 2023-12-21 07:44:47.136512+00:00
+[2023-12-21T07:44:51.753+0000] {standard_task_runner.py:57} INFO - Started process 95 to run task
+[2023-12-21T07:44:51.756+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'example_dag', 'save_data', 'manual__2023-12-21T07:44:47.136512+00:00', '--job-id', '143', '--raw', '--subdir', 'DAGS_FOLDER/first.py', '--cfg-path', '/tmp/tmp27l8a4_j']
+[2023-12-21T07:44:51.757+0000] {standard_task_runner.py:85} INFO - Job 143: Subtask save_data
+[2023-12-21T07:44:51.785+0000] {task_command.py:416} INFO - Running <TaskInstance: example_dag.save_data manual__2023-12-21T07:44:47.136512+00:00 [running]> on host dc6df2984800
+[2023-12-21T07:44:51.829+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='niko' AIRFLOW_CTX_DAG_ID='example_dag' AIRFLOW_CTX_TASK_ID='save_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T07:44:47.136512+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-21T07:44:47.136512+00:00'
+[2023-12-21T07:44:51.837+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/first.py", line 74, in save_data
+    if not os.path.exists(data_directory):
+NameError: name 'os' is not defined
+[2023-12-21T07:44:51.843+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=example_dag, task_id=save_data, execution_date=20231221T074447, start_date=20231221T074451, end_date=20231221T074451
+[2023-12-21T07:44:51.849+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 143 for task save_data (name 'os' is not defined; 95)
+[2023-12-21T07:44:51.889+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-12-21T07:44:51.903+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

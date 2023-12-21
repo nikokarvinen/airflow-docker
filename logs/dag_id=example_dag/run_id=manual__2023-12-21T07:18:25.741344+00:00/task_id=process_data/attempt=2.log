@@ -1,0 +1,32 @@
+[2023-12-21T07:23:29.174+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: example_dag.process_data manual__2023-12-21T07:18:25.741344+00:00 [queued]>
+[2023-12-21T07:23:29.180+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: example_dag.process_data manual__2023-12-21T07:18:25.741344+00:00 [queued]>
+[2023-12-21T07:23:29.181+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2023-12-21T07:23:29.188+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): process_data> on 2023-12-21 07:18:25.741344+00:00
+[2023-12-21T07:23:29.192+0000] {standard_task_runner.py:57} INFO - Started process 55 to run task
+[2023-12-21T07:23:29.195+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'example_dag', 'process_data', 'manual__2023-12-21T07:18:25.741344+00:00', '--job-id', '95', '--raw', '--subdir', 'DAGS_FOLDER/first.py', '--cfg-path', '/tmp/tmp0f_cfu1a']
+[2023-12-21T07:23:29.196+0000] {standard_task_runner.py:85} INFO - Job 95: Subtask process_data
+[2023-12-21T07:23:29.231+0000] {task_command.py:416} INFO - Running <TaskInstance: example_dag.process_data manual__2023-12-21T07:18:25.741344+00:00 [running]> on host a4cbb2176d38
+[2023-12-21T07:23:29.290+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='niko' AIRFLOW_CTX_DAG_ID='example_dag' AIRFLOW_CTX_TASK_ID='process_data' AIRFLOW_CTX_EXECUTION_DATE='2023-12-21T07:18:25.741344+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-21T07:18:25.741344+00:00'
+[2023-12-21T07:23:29.291+0000] {first.py:70} ERROR - Error in processing data: string indices must be integers
+[2023-12-21T07:23:29.296+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/first.py", line 66, in process_data
+    processed_data = [task for task in data if task["completed"]]
+  File "/opt/airflow/dags/first.py", line 66, in <listcomp>
+    processed_data = [task for task in data if task["completed"]]
+TypeError: string indices must be integers
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/first.py", line 71, in process_data
+    raise AirflowException(f"Error in processing data: {e}")
+airflow.exceptions.AirflowException: Error in processing data: string indices must be integers
+[2023-12-21T07:23:29.299+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=example_dag, task_id=process_data, execution_date=20231221T071825, start_date=20231221T072329, end_date=20231221T072329
+[2023-12-21T07:23:29.305+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 95 for task process_data (Error in processing data: string indices must be integers; 55)
+[2023-12-21T07:23:29.334+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-12-21T07:23:29.348+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
